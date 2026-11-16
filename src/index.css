@@ -1,0 +1,109 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bravi-night: #000d28;
+  --color-bravi-blush: rgba(255, 255, 255, 0.08);
+  --color-bravi-pink: #1a3358;
+  --color-bravi-rose: rgba(231, 183, 198, 0.45);
+  --color-bravi-ink: #f4f7fb;
+  --color-bravi-deep: #f6d5e0;
+  --color-bravi-pill: #e7b7c6;
+  --color-bravi-card: rgba(255, 255, 255, 0.06);
+  --color-bravi-line: rgba(255, 255, 255, 0.16);
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-script: "Great Vibes", cursive;
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-bravi-card backdrop-blur-xl border border-bravi-line shadow-[0_12px_40px_rgba(0,0,0,0.35)] rounded-2xl;
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.7; transform: scale(1.16) rotate(12deg); }
+}
+
+@keyframes premiere-shimmer {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
+}
+
+.sparkle-icon {
+  animation: sparkle-twinkle 1.8s ease-in-out infinite;
+}
+
+.premiere-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.premiere-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  animation: premiere-shimmer 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes veil-drift {
+  0%, 100% { transform: translateX(-8%) skewX(-8deg); opacity: 0.4; }
+  50% { transform: translateX(18%) skewX(-4deg); opacity: 0.75; }
+}
+
+@keyframes veil-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+}
+
+.encore-veil {
+  position: relative;
+  overflow: hidden;
+}
+
+.encore-veil::before {
+  content: "";
+  position: absolute;
+  inset: -20% -40%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.35) 38%,
+    rgba(232, 168, 184, 0.45) 50%,
+    rgba(255, 255, 255, 0.35) 62%,
+    transparent 80%
+  );
+  animation: veil-drift 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.veiled-title {
+  user-select: none;
+  letter-spacing: 0.28em;
+  filter: blur(6px);
+  animation: veil-pulse 3.4s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #000d28;
+  color: var(--color-bravi-ink);
+}
+
+body {
+  background-color: #000d28;
+  @apply text-bravi-ink antialiased min-h-screen selection:bg-bravi-pill selection:text-bravi-night;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

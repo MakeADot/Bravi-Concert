@@ -1,0 +1,39 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/bravi/concerts/26-winter-fki-tower",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/bravi/concerts/26-winter-fki-tower/assets/:path*",
+      "destination": "/assets/:path*"
+    },
+    {
+      "source": "/bravi/concerts/26-winter-fki-tower/images/:path*",
+      "destination": "/images/:path*"
+    },
+    {
+      "source": "/bravi/concerts/26-winter-fki-tower/logo-light.svg",
+      "destination": "/logo-light.svg"
+    },
+    {
+      "source": "/bravi/concerts/26-winter-fki-tower/logo-dark.svg",
+      "destination": "/logo-dark.svg"
+    },
+    {
+      "source": "/bravi/concerts/26-winter-fki-tower",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/bravi/concerts/26-winter-fki-tower/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
