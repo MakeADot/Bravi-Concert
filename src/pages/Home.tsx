@@ -46,24 +46,29 @@ export default function Home() {
 
         <main className="space-y-4">
           <h2 className="text-xl font-bold tracking-tight mb-6">공연 일정</h2>
-          {sessions.map((session, index) => (
-            <motion.div
-              key={session.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.08 }}
-            >
-              <Link
-                to={session.path}
-                className="glass-panel p-6 sm:p-8 block group hover:border-bravi-deep/40 transition-all duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.4)] relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          {sessions.map((session, index) => {
+            const card = (
+              <>
+                {session.available && (
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                )}
 
                 <div className="relative z-10">
-                  <span className="inline-block text-bravi-night font-medium text-sm tracking-wide bg-bravi-pill px-3 py-1 rounded-full mb-4">
-                    {session.dateLabel}
-                  </span>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-bravi-ink group-hover:text-bravi-deep transition-colors">
+                  <div className="flex flex-wrap items-center gap-2 mb-4">
+                    <span className="inline-block text-bravi-night font-medium text-sm tracking-wide bg-bravi-pill px-3 py-1 rounded-full">
+                      {session.dateLabel}
+                    </span>
+                    {!session.available && (
+                      <span className="inline-block text-bravi-ink/75 font-medium text-xs tracking-[0.16em] uppercase bg-white/10 border border-bravi-line px-3 py-1 rounded-full">
+                        Coming Soon
+                      </span>
+                    )}
+                  </div>
+                  <h3
+                    className={`text-2xl sm:text-3xl font-bold text-bravi-ink transition-colors ${
+                      session.available ? 'group-hover:text-bravi-deep' : ''
+                    }`}
+                  >
                     {session.title}
                   </h3>
                   <p className="mt-2 text-bravi-deep text-sm font-medium">{session.ensemble}</p>
@@ -72,9 +77,34 @@ export default function Home() {
                     {series.time}
                   </p>
                 </div>
-              </Link>
-            </motion.div>
-          ))}
+              </>
+            );
+
+            return (
+              <motion.div
+                key={session.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.08 }}
+              >
+                {session.available ? (
+                  <Link
+                    to={session.path}
+                    className="glass-panel p-6 sm:p-8 block group hover:border-bravi-deep/40 transition-all duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.4)] relative overflow-hidden"
+                  >
+                    {card}
+                  </Link>
+                ) : (
+                  <div
+                    aria-disabled="true"
+                    className="glass-panel p-6 sm:p-8 block relative overflow-hidden opacity-55 cursor-not-allowed select-none"
+                  >
+                    {card}
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
         </main>
 
         <footer className="mt-20 pt-8 border-t border-bravi-line text-center text-bravi-ink/45 text-xs">

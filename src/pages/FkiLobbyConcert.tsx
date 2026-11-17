@@ -17,7 +17,7 @@ export default function FkiLobbyConcert() {
     window.scrollTo(0, 0);
   }, [session]);
 
-  if (!session) {
+  if (!session || !session.available) {
     return <Navigate to="/" replace />;
   }
 

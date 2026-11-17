@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { X } from 'lucide-react';
 import { profiles, type Profile } from '../data/profiles';
+import { asset } from '../site';
 
 export default function Profiles() {
   const [selected, setSelected] = useState<Profile | null>(null);
@@ -9,8 +10,7 @@ export default function Profiles() {
   return (
     <section id="profiles" className="py-16 px-6 max-w-screen-md mx-auto">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-bold mb-3 tracking-tight">연주자 프로필</h2>
-        <p className="text-bravi-ink/60 text-sm">무대를 구성하는 네 자리의 예시 프로필입니다</p>
+        <h2 className="text-3xl font-bold tracking-tight">연주자 프로필</h2>
       </div>
 
       <div className="space-y-4">
@@ -23,8 +23,13 @@ export default function Profiles() {
             transition={{ delay: index * 0.1 }}
             className="glass-panel p-4 sm:p-5 flex gap-4 sm:gap-5"
           >
-            <div className="w-28 sm:w-36 shrink-0 aspect-[3/4] rounded-xl overflow-hidden border border-white/20 bg-gradient-to-br from-[#163056] via-[#5c3d58] to-[#d4a3b8] flex items-end p-3">
-              <span className="text-white text-3xl font-semibold leading-none">{profile.monogram}</span>
+            <div className="w-28 sm:w-36 shrink-0 aspect-[3/4] rounded-xl overflow-hidden border border-white/20 bg-[#10243f]">
+              <img
+                src={asset(profile.photo)}
+                alt=""
+                className="h-full w-full object-cover"
+                style={{ objectPosition: profile.photoPosition }}
+              />
             </div>
 
             <div className="min-w-0 flex-1 flex flex-col">
@@ -32,7 +37,7 @@ export default function Profiles() {
                 {profile.instrument}
               </span>
               <h3 className="text-xl font-semibold text-bravi-ink mb-2">{profile.name}</h3>
-              <p className="text-sm text-bravi-ink/70 leading-relaxed flex-1">{profile.intro}</p>
+              <p className="text-sm text-bravi-ink/70 leading-relaxed flex-1 whitespace-pre-line">{profile.intro}</p>
               <button
                 type="button"
                 onClick={() => setSelected(profile)}
@@ -104,8 +109,13 @@ function ProfileModal({ profile, onClose }: { profile: Profile | null; onClose: 
             className="glass-panel relative z-10 w-full sm:max-w-lg max-h-[88vh] flex flex-col rounded-t-2xl sm:rounded-2xl outline-none bg-[#061428]/95"
           >
             <div className="flex items-start gap-4 p-5 sm:p-6 pb-4 border-b border-bravi-line shrink-0">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-gradient-to-br from-[#163056] via-[#5c3d58] to-[#d4a3b8] flex items-end p-2 shrink-0">
-                <span className="text-white text-2xl font-semibold leading-none">{profile.monogram}</span>
+              <div className="w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden bg-[#10243f] shrink-0">
+                <img
+                  src={asset(profile.photo)}
+                  alt=""
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: profile.photoPosition }}
+                />
               </div>
               <div className="min-w-0 flex-1 pt-0.5">
                 <span className="text-bravi-deep text-xs font-bold tracking-widest uppercase block mb-1">
@@ -126,11 +136,6 @@ function ProfileModal({ profile, onClose }: { profile: Profile | null; onClose: 
             </div>
 
             <div className="overflow-y-auto p-5 sm:p-6 space-y-3">
-              {profile.quote && (
-                <blockquote className="text-bravi-deep text-sm sm:text-base font-medium leading-relaxed border-l-2 border-bravi-pill pl-3">
-                  “{profile.quote}”
-                </blockquote>
-              )}
               {profile.bio.map((paragraph) => (
                 <p key={paragraph.slice(0, 24)} className="text-bravi-ink/75 text-sm leading-relaxed">
                   {paragraph}

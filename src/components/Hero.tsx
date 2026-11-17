@@ -14,7 +14,16 @@ export default function Hero({ session }: { session: Session }) {
         >
           <p className="text-bravi-ink/55 text-xs font-semibold tracking-[0.28em] uppercase mb-1">FKI Tower</p>
           <p className="font-script text-3xl sm:text-4xl text-bravi-deep/80 leading-none mb-4">Lobby Concert</p>
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-bravi-ink leading-tight mb-4">{session.title}</h1>
+          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-bravi-ink leading-tight mb-4">
+            {session.id === '11-18' ? (
+              <>
+                <span className="block">3인 3색</span>
+                <span className="block">겨울 낭만 클래식</span>
+              </>
+            ) : (
+              session.title
+            )}
+          </h1>
           <p className="text-bravi-ink/75 text-sm sm:text-base leading-relaxed">
             {session.dateLabel} · {series.time}
             <br />
