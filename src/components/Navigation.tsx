@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { ArrowLeft } from 'lucide-react';
 
 const tabs = [
-  { id: 'intro', label: '공연 소개' },
   { id: 'program', label: '곡 리스트' },
   { id: 'profiles', label: '연주자 프로필' },
 ];
@@ -51,7 +52,14 @@ export default function Navigation() {
           : 'bg-transparent py-4'
       }`}
     >
-      <div className="max-w-screen-md mx-auto px-4 sm:px-6">
+      <div className="relative max-w-screen-md mx-auto px-4 sm:px-6">
+        <Link
+          to="/"
+          aria-label="홈으로"
+          className="absolute left-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-[#000d28]/85 text-bravi-ink shadow-[0_4px_14px_rgba(0,0,0,0.35)] transition-colors hover:bg-[#000d28] sm:left-5"
+        >
+          <ArrowLeft className="h-5 w-5" aria-hidden="true" />
+        </Link>
         <ul className="flex items-center justify-center gap-2 sm:gap-3 pb-1">
           {tabs.map((tab) => (
             <li key={tab.id} className="flex-shrink-0">

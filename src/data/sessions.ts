@@ -1,6 +1,7 @@
 export type Session = {
   id: string;
   path: string;
+  date: string;
   dateLabel: string;
   title: string;
   ensemble: string;
@@ -21,16 +22,19 @@ export const sessions: Session[] = [
   {
     id: '11-18',
     path: '/11-18',
+    date: '2026-11-18',
     dateLabel: '11.18 수',
     title: '3인 3색 겨울 낭만 클래식',
     ensemble: '피아노 3중주',
     lineup: '플루트, 첼로, 피아노',
-    feature: '3가지 악기의 매력과 차가운 겨울이 만나 꽃피우는 낭만적인 사랑과 열정',
+    feature:
+      '플루트, 첼로, 피아노가 만들어내는 세 악기의 조화로운 앙상블을 만나보세요.\n친숙한 영화 음악부터 역동적인 탱고까지, 서로 다른 매력을 지닌 음악을 한 무대에 담았습니다.\n클래식의 섬세함과 다채로운 리듬이 어우러지는 특별한 시간을 경험해 보세요.',
     available: true,
   },
   {
     id: '11-25',
     path: '/11-25',
+    date: '2026-11-25',
     dateLabel: '11.25 수',
     title: '굿바이 2026 클래식 세레나데',
     ensemble: '피아노 5중주 (5인)',
@@ -41,6 +45,7 @@ export const sessions: Session[] = [
   {
     id: '12-02',
     path: '/12-02',
+    date: '2026-12-02',
     dateLabel: '12.02 수',
     title: '브라스 판타지아 in christmas',
     ensemble: '금관악기 5중주 (5인)',
@@ -51,6 +56,7 @@ export const sessions: Session[] = [
   {
     id: '12-09',
     path: '/12-09',
+    date: '2026-12-09',
     dateLabel: '12.09 수',
     title: '첼로 프로포즈',
     ensemble: '첼로, 피아노 2중주 (2인)',
@@ -61,6 +67,7 @@ export const sessions: Session[] = [
   {
     id: '12-16',
     path: '/12-16',
+    date: '2026-12-16',
     dateLabel: '12.16 수',
     title: '처음 만나는 하프',
     ensemble: '플루트 하프 듀오 (2인)',
@@ -71,6 +78,7 @@ export const sessions: Session[] = [
   {
     id: '12-23',
     path: '/12-23',
+    date: '2026-12-23',
     dateLabel: '12.23 수',
     title: '재즈 렉처 콘서트',
     ensemble: '재즈 트리오 (3인)',
@@ -82,4 +90,25 @@ export const sessions: Session[] = [
 
 export function findSession(id: string | undefined) {
   return sessions.find((session) => session.id === id);
+}
+
+function startOfDay(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
+function sessionDay(session: Session) {
+  const [year, month, day] = session.date.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+export function isPastSession(session: Session, now = new Date()) {
+  return sessionDay(session) < startOfDay(now);
+}
+
+export function isTodaySession(session: Session, now = new Date()) {
+  return sessionDay(session).getTime() === startOfDay(now).getTime();
+}
+
+export function isSessionOpen(session: Session, now = new Date()) {
+  return session.available || isPastSession(session, now);
 }

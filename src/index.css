@@ -1,5 +1,5 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css");
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Source+Serif+4:opsz,wght@8..60,500..700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -25,6 +25,91 @@
 @keyframes veil-drift {
   0%, 100% { transform: translateX(-8%) skewX(-8deg); opacity: 0.4; }
   50% { transform: translateX(18%) skewX(-4deg); opacity: 0.75; }
+}
+
+@keyframes today-glow {
+  0%, 100% {
+    border-color: rgba(246, 213, 224, 0.35);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.35),
+      0 0 12px rgba(231, 183, 198, 0.16);
+  }
+  50% {
+    border-color: rgba(246, 213, 224, 0.9);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.35),
+      0 0 22px rgba(231, 183, 198, 0.55);
+  }
+}
+
+.today-glow {
+  animation: today-glow 3.4s ease-in-out infinite;
+}
+
+@keyframes survey-glow {
+  0%, 100% {
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.45),
+      0 0 16px rgba(246, 213, 224, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.45),
+      0 0 28px rgba(246, 213, 224, 0.72);
+  }
+}
+
+.survey-float {
+  animation: survey-glow 2.6s ease-in-out infinite;
+}
+
+@keyframes snow-fall {
+  0% {
+    transform: translate3d(0, -8vh, 0);
+  }
+  100% {
+    transform: translate3d(var(--snow-drift), 108vh, 0);
+  }
+}
+
+.snowfall {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.snowflake {
+  position: absolute;
+  top: 0;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+  animation-name: snow-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .today-glow {
+    animation: none;
+    border-color: rgba(246, 213, 224, 0.7);
+    box-shadow:
+      0 12px 40px rgba(0, 0, 0, 0.35),
+      0 0 16px rgba(231, 183, 198, 0.35);
+  }
+
+  .survey-float {
+    animation: none;
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.45),
+      0 0 18px rgba(246, 213, 224, 0.45);
+  }
+
+  .snowfall {
+    display: none;
+  }
 }
 
 .encore-veil {
@@ -66,4 +151,41 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.date-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  font-family: "Source Serif 4", "Iowan Old Style", Palatino, serif;
+  font-weight: 600;
+  font-variation-settings: "opsz" 24;
+  line-height: 1;
+}
+
+.date-mark-num {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-size: 1.45rem;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.date-mark-day {
+  margin-top: 0.3rem;
+  margin-right: -0.25em;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.25em;
+  text-align: center;
+}
+
+@media (min-width: 40rem) {
+  .date-mark-num {
+    font-size: 1.6rem;
+  }
+
+  .date-mark-day {
+    font-size: 0.68rem;
+  }
 }

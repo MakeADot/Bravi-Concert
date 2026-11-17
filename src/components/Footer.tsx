@@ -28,8 +28,7 @@ export default function Footer() {
         </div>
 
         <p className="text-bravi-ink/45 text-xs leading-relaxed">
-          FKI Tower Lobby Concert
-          <br />© 2026 브라비. All rights reserved.
+          © 2026 브라비. All rights reserved.
         </p>
       </div>
     </footer>
