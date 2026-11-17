@@ -39,10 +39,11 @@ export default function SurveyFloat() {
           >
             <span className="min-w-0 flex-1">
               <span className="block text-[15px] font-extrabold leading-snug tracking-tight sm:text-base">
-                오늘 공연, 재밌게 보셨나요?
+                오늘 공연 재밌게 보셨나요?
               </span>
               <span className="mt-0.5 block break-keep text-[13px] font-semibold leading-snug">
-                15초 설문 참여하고 스타벅스 커피 받아가세요!
+                <span className="block sm:inline">15초 설문 참여하고,</span>{' '}
+                <span className="block sm:inline">스타벅스 커피 받아가세요!</span>
               </span>
             </span>
             <span className="inline-flex shrink-0 items-center gap-0.5 self-center rounded-full bg-[#000d28] px-3.5 py-2.5 text-sm font-bold text-[#f6d5e0]">
